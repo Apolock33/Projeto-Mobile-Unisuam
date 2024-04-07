@@ -1,0 +1,35 @@
+<div>
+  <ion-card *ngFor="let item of gamesList" id="{{item.id}}" class="mb-3">
+    <ion-img src="{{item.short_screenshots[0].image}}" />
+    <ion-card-header>
+      <ion-card-title>{{item.name}}</ion-card-title>
+      <div class="d-flex mt-2">
+        <ion-icon name="star" *ngFor="let i of ratingStar(item.rating_top)"></ion-icon>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion value="{{item.id}}">
+          <ion-item slot="header">
+            <ion-icon slot="center" name="chevron-down-outline"></ion-icon>
+          </ion-item>
+          <ion-item slot="content" class="accordion-content">
+            <div>
+              <div class="d-flex align-iitems-between mb-3">
+                <h2>Lançamento: {{item.released}}</h2>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h2>Generos:
+                  <h2 *ngFor="let gender of item.genres">{{gender.name}}</h2>
+                </h2>
+              </div>
+            </div>
+          </ion-item>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMoreGamesList()">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
