@@ -2,7 +2,11 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 :root {
+  --ion-font-family: 'Outfit', sans-serif;
+
   --ion-color-primary: #00A0F4;
 	--ion-color-primary-rgb: 0,160,244;
 	--ion-color-primary-contrast: #000000;

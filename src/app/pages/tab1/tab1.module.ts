@@ -6,9 +6,9 @@ import { Tab1Page } from './tab1.page';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { GameService } from 'src/app/services/game.service';
 import { HttpClientModule } from '@angular/common/http';
-import { GamecardComponent } from 'src/app/components/gamecard/gamecard.component';
 import { UserinfoComponent } from 'src/app/components/userinfo/userinfo.component';
-
+import { GameListComponent } from 'src/app/components/game-list/game-list.component';
+import { GameDetailsComponent } from 'src/app/components/game-details/game-details.component';
 
 @NgModule({
   imports: [
@@ -20,8 +20,9 @@ import { UserinfoComponent } from 'src/app/components/userinfo/userinfo.componen
   ],
   declarations: [
     Tab1Page,
-    GamecardComponent,
-    UserinfoComponent
+    UserinfoComponent,
+    GameListComponent,
+    GameDetailsComponent
   ],
   providers: [GameService]
 })

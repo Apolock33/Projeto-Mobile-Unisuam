@@ -1,7 +1,7 @@
 @import "../../../theme/variables.scss";
 
 ion-icon {
-    color: #00A0F4;
+    color: linear-gradient(0deg, #191919, #ffffff);
     font-size: 30px;
 }
 
@@ -15,4 +15,12 @@ ion-card {
 
 ion-item{
     background-color: #191919;
+}
+
+ion-accordion-group{
+    border-radius: 0,10px,0,10px  ;
+}
+
+.platform-icon{
+    color: #ffffff !important;
 }

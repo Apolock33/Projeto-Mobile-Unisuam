@@ -1,0 +1,3 @@
+Alteração: Lista de cards sendo exibida, componentes: loading, filter e userInfo preparados.
+
+Necessário: melhorias no design dos cards, criação de sistema de login para montar componente userInfo, montagem de componente loading, sistema de lista de desejos, favoritos e avaliação (Todos os 3 dependem de API). Também é necesário a montagem de um sistema de filtros dos jogos.

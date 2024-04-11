@@ -5,6 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GameService {
+  public title: string = '';
+  public gamesList: any;
+  public queryResponse: any;
+  public isModalOpen: boolean = false;
 
   apiinfo = {
     rawgUrl: "https://api.rawg.io/api",
@@ -14,8 +18,15 @@ export class GameService {
 
   constructor(private http: HttpClient) { }
 
-  getGamesList(query:string) {
+  public getGamesList(query: string) {
     let getList = this.http.get(query);
+    this.gamesList = getList;
+    return getList;
+  }
+
+  public filterGames(query: string, filter: string) {
+    let getList = this.http.get(query + filter);
+    this.gamesList = getList;
     return getList;
   }
 }

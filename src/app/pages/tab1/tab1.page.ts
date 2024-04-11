@@ -8,6 +8,5 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
- 
+  
 }
