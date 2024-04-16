@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { GameService } from 'src/app/services/game.service';
+import { GameDetailsComponent } from '../game-details/game-details.component';
 
 @Component({
   selector: 'app-game-list',
@@ -16,8 +17,9 @@ export class GameListComponent implements OnInit, OnChanges {
   public title: string = '';
   public filter: string = '';
   public platforms: Array<string> = [];
+  public openCloseModal: boolean = false;
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, public modalCtrl: ModalController) { }
 
   public ngOnChanges(): void {
     this.loadGamesList();
@@ -25,6 +27,13 @@ export class GameListComponent implements OnInit, OnChanges {
 
   public ngOnInit(): void {
     this.loadGamesList();
+  }
+
+  public onIonInfinite(ev: Event) {
+    this.loadMoreGamesList()
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 1000);
   }
 
   public loadGamesList() {
@@ -44,7 +53,7 @@ export class GameListComponent implements OnInit, OnChanges {
       this.gameService.filterGames(this.gameService.apiinfo.rawgUrl + this.gameService.apiinfo.route + "?" + this.gameService.apiinfo.key + "&page=" + this.actualPage, `&search=${this.filter}`).subscribe(item => {
         this.gameService.gamesList = item;
         this.gamesList = this.gameService.gamesList.results;
-        this.gameService.title = this.filter;
+        this.gameService.title = "'" + this.filter + "'";
         this.title = this.gameService.title;
       });
     }
@@ -74,15 +83,15 @@ export class GameListComponent implements OnInit, OnChanges {
     return this.gamesList;
   }
 
-  public onIonInfinite(ev: Event) {
-    this.loadMoreGamesList()
-    setTimeout(() => {
-      (ev as InfiniteScrollCustomEvent).target.complete();
-    }, 1000);
-  }
-
   public ratingStar(rating: number): Array<number> {
     return this.starRating = new Array(rating);
   }
 
+  public async openGameDetails(id: string) {
+    this.gameService.gameIdService = id;
+    const modal = await this.modalCtrl.create({
+      component: GameDetailsComponent,
+    });
+    await modal.present();
+  }
 }

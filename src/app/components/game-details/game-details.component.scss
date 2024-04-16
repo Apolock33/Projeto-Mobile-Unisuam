@@ -1,0 +1,42 @@
+.background-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: auto;
+    height: 250px;
+}
+
+ion-icon {
+    font-size: 25px;
+}
+
+.play-time {
+    font-weight: bold;
+    font-size: 65px;
+    color: var(--ion-color-primary);
+}
+
+.platform-icon {
+    font-size: 55px;
+}
+
+.tag-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(130px, 1fr));
+    justify-content: center;
+}
+
+.requirements-button {
+    color: var(--ion-color-tertiary) !important;
+}
+
+.img-carousel {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30vh;
+    overflow-x: scroll;
+}
+
+.img-carousel ion-img{
+    border-radius: 2rem;
+}

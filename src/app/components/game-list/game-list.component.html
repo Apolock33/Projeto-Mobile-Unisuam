@@ -7,49 +7,29 @@
       <ion-searchbar show-clear-button="focus" placeholder="Buscar..." [(ngModel)]="this.filter"
         (ngModelChange)="this.loadGamesList()"></ion-searchbar>
     </div>
-    <div class="d-flex flex-row justify-content-center">
-      <h6>Ordenar por: </h6>
-    </div>
   </div>
   <ion-card *ngFor="let item of gamesList" id="{{item.id}}" class="mb-3">
     <ion-img src="{{item.short_screenshots[0].image}}" />
     <ion-card-header>
       <div class="d-flex flex-row align-items-center">
-        <h6>Plataformas: </h6>
-        <div *ngFor="let platform of item.parent_platforms">
-          <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon" name="logo-playstation"></ion-icon>
+        <div *ngFor="let platform of item.parent_platforms"
+          class="d-flex flex-row align-items-center justify-content-center">
+          <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon"
+            name="logo-playstation"></ion-icon>
           <ion-icon *ngIf="platform.platform.slug == 'pc'" class="mx-2 platform-icon" name="desktop-outline"></ion-icon>
-            <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon" name="logo-xbox"></ion-icon>
+          <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon"
+            name="logo-xbox"></ion-icon>
         </div>
       </div>
       <ion-card-title>{{item.name}}</ion-card-title>
       <div class="d-flex my-3">
         <ion-icon name="star" *ngFor="let i of ratingStar(item.rating_top)" color="primary"></ion-icon>
       </div>
-      <ion-accordion-group>
-        <ion-accordion value="{{item.id}}" toggleIcon="chevron-down-outline" toggleIconSlot="start">
-          <ion-item slot="header">
-            <h5>Saiba Mais</h5>
-          </ion-item>
-          <ion-item slot="content" class="accordion-content">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6>
-                  Lançamento: {{item.released}}
-                </h6>
-              </div>
-              <div>
-                <h6>
-                  Generos:
-                  <div class="d-flex">
-                    <h6 class="mx-1" *ngFor="let gender of item.genres">{{gender.name}}</h6>
-                  </div>
-                </h6>
-              </div>
-            </div>
-          </ion-item>
-        </ion-accordion>
-      </ion-accordion-group>
+      <div class="d-flex justify-content-center">
+        <ion-button class="game-details-button" shape="round" fill="outline" (click)="openGameDetails(item.id)">
+          Mais Detalhes
+        </ion-button>
+      </div>
     </ion-card-header>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">

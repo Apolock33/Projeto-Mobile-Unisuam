@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginPage } from './pages/login/login.page';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,4 @@ import { LoginPage } from './pages/login/login.page';
 })
 export class AppComponent {
   constructor() {}
-  rootPage = LoginPage;
 }

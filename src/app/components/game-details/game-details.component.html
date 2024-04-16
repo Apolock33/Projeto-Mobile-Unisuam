@@ -1,19 +1,100 @@
-<ion-modal [isOpen]="this.IsModalOpen">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Modal</ion-title>
-        <ion-buttons slot="end" (click)="this.IsModalOpen">
-          <ion-button>Close</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
-        reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui. Eaque,
-        dicta.
-      </p>
-    </ion-content>
-  </ng-template>
-</ion-modal>
+<ion-content [fullscreen]="true">
+  <div class="d-flex flex-column background-img"
+    style="background-image: linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21, 1)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0)), url('{{this.gameDetails.background_image}}');">
+    <div class="p-3">
+      <div class="d-flex justify-content-end">
+        <ion-button fill="clear" shape="round" color="tertiary" (click)="dismiss()" [strong]="true">
+          <ion-icon name="chevron-down-outline" color="tertiary"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="text-center py-5">
+        <ion-title>{{this.gameDetails['name']}}</ion-title>
+        <ion-icon name="star" *ngFor="let i of ratingStar(this.gameDetails.rating_top)" color="primary"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center py-3">
+    <h3>Descrição:</h3>
+    <p class="p-2">{{this.gameDetails.description_raw}}</p>
+  </div>
+
+  <div class="text-center py-3">
+    <h3>Tempo para Zerar:</h3>
+    <h1 class="play-time px-3">{{this.gameDetails.playtime}} h</h1>
+  </div>
+
+  <div class="text-center py-3">
+    <h3 class="pb-2">Plataformas:</h3>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+      <div *ngFor="let platform of this.gameDetails.parent_platforms"
+        class="d-flex flex-row align-items-center justify-content-center">
+        <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon"
+          name="logo-playstation"></ion-icon>
+        <ion-icon *ngIf="platform.platform.slug == 'pc'" class="mx-2 platform-icon" name="desktop-outline"></ion-icon>
+        <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon"
+          name="logo-xbox"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center py-5">
+    <h3>Data de Lançamento:</h3>
+    <h1>{{this.gameDetails.released}}</h1>
+  </div>
+
+  <div class="text-center py-3">
+    <h3>Generos:</h3>
+    <div class="d-flex justify-content-center">
+      <h3 *ngFor="let genre of this.gameDetails.genres">{{genre.name}}</h3>
+    </div>
+  </div>
+
+  <div class="text-center p-3">
+    <h3>Tags:</h3>
+    <div class="tag-list p-3">
+      <h5 *ngFor="let tag of this.gameDetails.tags">{{tag.name}}</h5>
+    </div>
+  </div>
+
+  <div class="text-center p-3">
+    <h3>Desnvolvedores:</h3>
+    <div class="d-flex justify-content-center px-5">
+      <h3 *ngFor="let dev of this.gameDetails.developers">{{dev.name}}</h3>
+    </div>
+  </div>
+
+  <div class="text-center p-5">
+    <h3>Website:</h3>
+    <div>
+      <h1>{{this.gameDetails.website}}</h1>
+    </div>
+  </div>
+
+  <ion-button id="requirements" expand="block" size="large" color="primary"
+    class="p-3 requirements-button">Requisitos</ion-button>
+  <ion-modal #modal trigger="requirements" [initialBreakpoint]="1.00" [breakpoints]="[0, 0.25, 0.5, 0.75, 1.00]">
+    <ng-template>
+      <ion-header class="d-flex justify-content-center">
+        <ion-button (click)="modal.dismiss()" shape="round" fill="clear" color="tertiary">
+          <ion-icon class="p-3" color="tertiary" name="chevron-down-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-header>
+      <ion-content class="ion-padding"> <!--Voltar nessa parte do código-->
+        <p>{{this.gameDetails.platforms[0].requirements.minimum}}</p>
+        <br />
+        <p>{{this.gameDetails.platforms[0].requirements.recommended}}</p>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <div class="img-carousel"> <!--Voltar nessa parte do código-->
+    <ion-img src="{{this.gameDetails.background_image}}"></ion-img>
+    <ion-img src="{{this.gameDetails.background_image_additional}}"></ion-img>
+  </div>
+
+  <div class="text-center p-3"> <!--Voltar nessa parte do código-->
+    <h3>Avaliações</h3>
+  </div>
+</ion-content>
