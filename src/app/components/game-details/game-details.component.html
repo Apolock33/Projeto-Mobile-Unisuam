@@ -16,17 +16,17 @@
   </div>
 
   <div class="text-center py-3">
-    <h3>Descrição:</h3>
-    <p class="p-2">{{this.gameDetails.description_raw}}</p>
+    <h2>Descrição:</h2>
+    <p class="px-4">{{this.gameDetails.description_raw}}</p>
   </div>
 
   <div class="text-center py-3">
-    <h3>Tempo para Zerar:</h3>
-    <h1 class="play-time px-3">{{this.gameDetails.playtime}} h</h1>
+    <h2>Tempo para Zerar:</h2>
+    <h3 class="play-time px-3">{{this.gameDetails.playtime}} h</h3>
   </div>
 
   <div class="text-center py-3">
-    <h3 class="pb-2">Plataformas:</h3>
+    <h2 class="pb-2">Plataformas:</h2>
     <div class="d-flex flex-row align-items-center justify-content-center">
       <div *ngFor="let platform of this.gameDetails.parent_platforms"
         class="d-flex flex-row align-items-center justify-content-center">
@@ -40,35 +40,36 @@
   </div>
 
   <div class="text-center py-5">
-    <h3>Data de Lançamento:</h3>
+    <h2>Data de Lançamento:</h2>
     <h1>{{this.gameDetails.released}}</h1>
   </div>
 
   <div class="text-center py-3">
-    <h3>Generos:</h3>
+    <h2>Generos:</h2>
     <div class="d-flex justify-content-center">
       <h3 *ngFor="let genre of this.gameDetails.genres">{{genre.name}}</h3>
     </div>
   </div>
 
-  <div class="text-center p-3">
-    <h3>Tags:</h3>
-    <div class="tag-list p-3">
+  <div class="text-center p-5">
+    <h2>Tags:</h2>
+    <div class="tag-list px-3">
       <h5 *ngFor="let tag of this.gameDetails.tags">{{tag.name}}</h5>
     </div>
   </div>
 
   <div class="text-center p-3">
-    <h3>Desnvolvedores:</h3>
+    <h2>Desnvolvedores:</h2>
     <div class="d-flex justify-content-center px-5">
       <h3 *ngFor="let dev of this.gameDetails.developers">{{dev.name}}</h3>
     </div>
   </div>
 
-  <div class="text-center p-5">
-    <h3>Website:</h3>
+  <div class="text-center py-3 px-2">
+    <h2>Website:</h2>
     <div>
-      <h1>{{this.gameDetails.website}}</h1>
+      <a class="text-decoration-underline text-white"
+        href="{{this.gameDetails.website}}">{{this.gameDetails.website}}</a>
     </div>
   </div>
 
@@ -81,20 +82,25 @@
           <ion-icon class="p-3" color="tertiary" name="chevron-down-outline" size="large"></ion-icon>
         </ion-button>
       </ion-header>
-      <ion-content class="ion-padding"> <!--Voltar nessa parte do código-->
-        <p>{{this.gameDetails.platforms[0].requirements.minimum}}</p>
+      <ion-content class="ion-padding">
+        <div *ngFor="let pc of this.gameDetails.platforms">
+          <p *ngIf="pc.platform.slug == 'pc'">{{this.gameDetails.platforms[0].requirements.minimum}}</p>
+          <br />
+          <p *ngIf="pc.platform.slug == 'pc'">{{this.gameDetails.platforms[0].requirements.recommended}}</p>
+        </div>
         <br />
-        <p>{{this.gameDetails.platforms[0].requirements.recommended}}</p>
+
       </ion-content>
     </ng-template>
   </ion-modal>
 
-  <div class="img-carousel"> <!--Voltar nessa parte do código-->
-    <ion-img src="{{this.gameDetails.background_image}}"></ion-img>
-    <ion-img src="{{this.gameDetails.background_image_additional}}"></ion-img>
+  <div class="img-carousel" *ngFor="let img of this.imgList">
+    <div>
+      <ion-img src="{{img}}" class="d-block w-100"></ion-img>
+    </div>
   </div>
 
   <div class="text-center p-3"> <!--Voltar nessa parte do código-->
-    <h3>Avaliações</h3>
+    <h2>Avaliações</h2>
   </div>
 </ion-content>

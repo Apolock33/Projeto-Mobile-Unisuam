@@ -13,7 +13,7 @@ export class GameService {
 
   apiinfo = {
     rawgUrl: "https://api.rawg.io/api",
-    key: "key=206e5f4d54464a29b734f75d47d90a66",
+    key: "key=f1e048d2a7fc4457b70b28f7f3cd5b64",
     route: "/games"
   }
 
@@ -35,5 +35,11 @@ export class GameService {
     let getDetails = this.http.get(query);
     this.singleGameObject = getDetails;
     return getDetails;
+  }
+
+  public getGameScreenshots(query: string) {
+    let getImgs = this.http.get(query);
+    this.singleGameObject = getImgs;
+    return getImgs;
   }
 }
