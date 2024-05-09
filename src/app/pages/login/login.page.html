@@ -1,32 +1,33 @@
 <ion-content class="ion-padding align-middle">
-  <div class="container">
+  <div class="container d-flex justify-content-center flex-column align-items-center">
 
-    <div class="text-center">
-      <h1 class="text-configs">The Gamer Club</h1>
+    <div class="logo">
+      <ion-img src="../../../assets/logo.svg"></ion-img>
     </div>
 
-    <div class="my-1">
+    <ng-form class="my-1">
       <div class="my-4">
-        <ion-input label="E-Mail" label-placement="floating" fill="outline"></ion-input>
+        <ion-input label="E-Mail" label-placement="floating" fill="outline" [(ngModel)]="this.email"></ion-input>
       </div>
       <div class="my-4">
-        <ion-input label="Senha" label-placement="floating" fill="outline"></ion-input>
+        <ion-input id="password" type="password" label="Senha" label-placement="floating" fill="outline"
+          [(ngModel)]="this.password">
+          <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="showPassword()">
+            <ion-icon slot="icon-only" name="eye-outline" aria-hidden="true" color="tertiary"></ion-icon>
+          </ion-button>
+        </ion-input>
       </div>
       <div class="my-3">
-        <ion-button size="large" expand="block" class="text-light enter-button">Entrar</ion-button>
+        <ion-button (click)="login()" expand="block" class="text-light enter-button">Entrar</ion-button>
       </div>
-    </div>
+    </ng-form>
 
-    <div class="d-flex justify-content-between align-items-center">
-      <div class="line"></div>
+    <div>
       <h6 class="mb-4">ou</h6>
-      <div class="line"></div>
     </div>
 
-    <div class="p-1 d-flex flex-column justify-content-between align-items-center">
-      <div class="google-img"></div>
-      <h5>Já possui uma conta?</h5>
-      <ion-button fill="clear" size="large">Inscreva-se!</ion-button>
-    </div>
+    <div class="google-img"></div>
+    <h5>Já possui uma conta?</h5>
+    <ion-button [routerLink]="['/register']" fill="clear">Inscreva-se!</ion-button>
   </div>
 </ion-content>

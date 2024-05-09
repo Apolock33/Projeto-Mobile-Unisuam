@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class GameService {
   public queryResponse: any;
   public gameIdService: string = '';
 
-  apiinfo = {
-    rawgUrl: "https://api.rawg.io/api",
-    key: "key=f1e048d2a7fc4457b70b28f7f3cd5b64",
+  public apiinfo = {
+    rawgUrl: 'https://api.rawg.io/api',
+    key: "key=376154a9e22642348b84a6a6df73fd04",
     route: "/games"
   }
 

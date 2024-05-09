@@ -2,11 +2,15 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { GameService } from 'src/app/services/game.service';
 import { GameDetailsComponent } from '../game-details/game-details.component';
+import { PlayedService } from 'src/app/services/played.service';
+import { Played } from 'src/app/models/played';
+import { RatingsComponent } from '../ratings/ratings.component';
+import { RatingService } from 'src/app/services/rating.service';
 
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
-  styleUrls: ['./game-list.component.scss'],
+  styleUrls: ['./game-list.component.scss']
 })
 export class GameListComponent implements OnInit, OnChanges {
   public loading: boolean = false;
@@ -17,9 +21,13 @@ export class GameListComponent implements OnInit, OnChanges {
   public title: string = '';
   public filter: string = '';
   public platforms: Array<string> = [];
-  public openCloseModal: boolean = false;
 
-  constructor(private gameService: GameService, public modalCtrl: ModalController) { }
+  constructor(
+    private gameService: GameService,
+    public modalCtrl: ModalController,
+    private playedService: PlayedService, 
+    private ratingService: RatingService,
+  ) { }
 
   public ngOnChanges(): void {
     this.loadGamesList();
@@ -40,7 +48,6 @@ export class GameListComponent implements OnInit, OnChanges {
     this.loading = true;
     if (this.filter.length == 0) {
       this.gameService.getGamesList(this.gameService.apiinfo.rawgUrl + this.gameService.apiinfo.route + "?" + this.gameService.apiinfo.key + "&page=" + this.actualPage).subscribe(item => {
-        console.log(item);
         this.gameService.gamesList = item;
         this.gamesList = this.gameService.gamesList.results;
         this.gameService.title = "Mais Vistos!";
@@ -79,12 +86,19 @@ export class GameListComponent implements OnInit, OnChanges {
         });
       });
     }
-    console.log(this.gamesList);
     return this.gamesList;
   }
 
   public ratingStar(rating: number): Array<number> {
     return this.starRating = new Array(rating);
+  }
+
+  public async createReview(id: string) {
+    sessionStorage.setItem('gameId', id);
+    const modal = await this.modalCtrl.create({
+      component: RatingsComponent,
+    });
+    await modal.present();
   }
 
   public async openGameDetails(id: string) {
@@ -93,5 +107,15 @@ export class GameListComponent implements OnInit, OnChanges {
       component: GameDetailsComponent,
     });
     await modal.present();
+  }
+
+  public addToPlayedGames(id: string) {
+    let playedInfo: Played = {
+      gameId: Number(id),
+    }
+    this.playedService.addPlayed(`${sessionStorage.getItem('uid')}`, playedInfo)
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

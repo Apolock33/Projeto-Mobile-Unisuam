@@ -44,7 +44,7 @@ export class GameDetailsComponent implements OnInit {
     return this.starRating = new Array(rating);
   }
 
-  dismiss() {
+  public dismiss() {
     this.modalCtrl.dismiss();
   }
 }

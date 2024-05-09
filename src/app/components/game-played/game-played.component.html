@@ -1,0 +1,38 @@
+<div *ngIf="this.gamePlayedList.length == 0" class="text-center mt-5">
+  <h4>Não há games já jogados ainda</h4>
+</div>
+
+<ion-card *ngFor="let game of gamePlayedList" id='{{game.id}}' class="my-3">
+  <ion-img src="{{game.background_image}}" />
+    <ion-card-header>
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <div *ngFor="let platform of game.parent_platforms" class="d-flex flex-row align-items-center">
+            <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon"
+              name="logo-playstation"></ion-icon>
+            <ion-icon *ngIf="platform.platform.slug == 'pc'" class="mx-2 platform-icon"
+              name="desktop-outline"></ion-icon>
+            <ion-icon *ngIf="platform.platform.slug == 'playstation'" class="mx-2 platform-icon"
+              name="logo-xbox"></ion-icon>
+          </div>
+        </div>
+        <div class="d-flex flex-row align-items-center">
+          <ion-button fill="clear" class="text-light">
+            <ion-icon name="trash-bin-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" class="text-light" (click)="createReview(game.id)">
+            <ion-icon name="book-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+      <ion-card-title>{{game.name}}</ion-card-title>
+      <div class="d-flex my-3">
+        <ion-icon name="star" *ngFor="let i of ratingStar(game.rating_top)" color="primary"></ion-icon>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ion-button class="game-details-button" shape="round" fill="outline" (click)="openGameDetails(game.id)">
+          Mais Detalhes
+        </ion-button>
+      </div>
+    </ion-card-header>
+</ion-card>

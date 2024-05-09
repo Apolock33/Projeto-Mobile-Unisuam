@@ -1,23 +1,23 @@
 <ion-content [fullscreen]="true">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="p-2">
+    <ion-fab-button fill="clear" shape="round" color="primary" (click)="dismiss()">
+      <ion-icon name="chevron-down-outline" color="tertiary"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
   <div class="d-flex flex-column background-img"
     style="background-image: linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21, 1)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0)), url('{{this.gameDetails.background_image}}');">
     <div class="p-3">
-      <div class="d-flex justify-content-end">
-        <ion-button fill="clear" shape="round" color="tertiary" (click)="dismiss()" [strong]="true">
-          <ion-icon name="chevron-down-outline" color="tertiary"></ion-icon>
-        </ion-button>
-      </div>
-
       <div class="text-center py-5">
-        <ion-title>{{this.gameDetails['name']}}</ion-title>
+        <ion-title>{{this.gameDetails.name}}</ion-title>
         <ion-icon name="star" *ngFor="let i of ratingStar(this.gameDetails.rating_top)" color="primary"></ion-icon>
       </div>
     </div>
   </div>
 
-  <div class="text-center py-3">
-    <h2>Descrição:</h2>
-    <p class="px-4">{{this.gameDetails.description_raw}}</p>
+  <div class="py-3">
+    <h2 class="text-center">Descrição:</h2>
+    <p class="px-4 description">{{this.gameDetails.description_raw}}</p>
   </div>
 
   <div class="text-center py-3">
@@ -47,7 +47,7 @@
   <div class="text-center py-3">
     <h2>Generos:</h2>
     <div class="d-flex justify-content-center">
-      <h3 *ngFor="let genre of this.gameDetails.genres">{{genre.name}}</h3>
+      <h3 *ngFor="let genre of this.gameDetails.genres" class="mx-2">{{genre.name}}</h3>
     </div>
   </div>
 
@@ -74,7 +74,7 @@
   </div>
 
   <ion-button id="requirements" expand="block" size="large" color="primary"
-    class="p-3 requirements-button">Requisitos</ion-button>
+    class="p-3 requirements-button text-light">Requisitos</ion-button>
   <ion-modal #modal trigger="requirements" [initialBreakpoint]="1.00" [breakpoints]="[0, 0.25, 0.5, 0.75, 1.00]">
     <ng-template>
       <ion-header class="d-flex justify-content-center">

@@ -1,2 +1,13 @@
-
-  <h1>user</h1>
+<section class="mt-5">
+  <div class="user-display">
+    <div class="avatar">
+      <h1>{{this.nickname[0]}}</h1>
+    </div>
+    <div>
+      <h3>Ola, {{this.nickname}}</h3>
+    </div>
+  </div>
+  <div class="px-5">
+    <ion-button fill="outline" expand="block" color="danger" (click)="logout()">Sair</ion-button>
+  </div>
+</section>

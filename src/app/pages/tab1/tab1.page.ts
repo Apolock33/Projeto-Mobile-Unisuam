@@ -1,6 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GameService } from 'src/app/services/game.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tab1',
