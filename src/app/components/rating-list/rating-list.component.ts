@@ -9,17 +9,18 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class RatingListComponent implements OnInit {
   public ratingList: any;
+  public uid: string = `${sessionStorage.getItem('uid')}`;
 
   constructor(private ratingServices: RatingService) { }
 
   ngOnInit() {
-    this.loadMyRatingList()
+    this.loadMyRatingList();
   }
 
   public loadMyRatingList() {
-    this.ratingServices.getRatingList(environment.firebaseConfig.databaseURL + this.ratingServices.queryInfo.route).subscribe((ratings: any) => {
+    this.ratingServices.getRatingListById(environment.firebaseConfig.databaseURL + this.ratingServices.queryInfo.route + `/${this.uid}`).subscribe((ratings: any) => {
       console.log(ratings);
       this.ratingList = ratings;
-    })
+    });
   }
 }
